@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#0d1117">
+  <title>remote-vibe</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="stylesheet" href="/vendor/xterm.css">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <!-- Pairing -->
+  <section id="pair" class="screen" hidden>
+    <div class="pair-box">
+      <h1>remote-vibe</h1>
+      <p>Run <code>remote-vibe pair</code> on your PC and scan the QR code, or paste the token here.</p>
+      <form id="pair-form">
+        <input id="pair-token" type="password" autocomplete="off" placeholder="Token" required>
+        <button type="submit" class="primary">Connect</button>
+      </form>
+      <p id="pair-error" class="error" hidden></p>
+    </div>
+  </section>
+
+  <!-- Session list -->
+  <section id="list" class="screen" hidden>
+    <header class="bar">
+      <h1>Sessions</h1>
+      <button id="refresh" class="icon" aria-label="Refresh">⟳</button>
+    </header>
+    <div class="actions">
+      <button id="new-agent" class="primary">✦ New agent session</button>
+      <button id="new-shell">＞_ New shell</button>
+    </div>
+    <ul id="sessions"></ul>
+    <p id="empty" class="muted" hidden>No sessions yet.</p>
+    <footer class="muted small"><button id="unpair" class="link">Forget this device</button></footer>
+  </section>
+
+  <!-- Project picker -->
+  <dialog id="picker">
+    <form method="dialog">
+      <h2 id="picker-title">Choose a project</h2>
+      <input id="picker-filter" type="search" placeholder="Filter or type a path…" autocomplete="off">
+      <ul id="projects"></ul>
+      <div class="dialog-actions">
+        <button value="cancel">Cancel</button>
+        <button id="picker-root" value="root">Use projects root</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Terminal -->
+  <section id="term-screen" class="screen" hidden>
+    <header class="bar compact">
+      <button id="back" class="icon" aria-label="Back">‹</button>
+      <span id="term-title" class="title"></span>
+      <span id="status" class="status" title="connection"></span>
+      <button id="font-down" class="icon" aria-label="Smaller font">A−</button>
+      <button id="font-up" class="icon" aria-label="Larger font">A+</button>
+    </header>
+    <div id="terminal"></div>
+    <div id="compose" hidden>
+      <textarea id="compose-text" rows="3" placeholder="Write a prompt… (sent as one paste)"></textarea>
+      <div class="compose-actions">
+        <button id="compose-cancel">Close</button>
+        <button id="compose-paste-only">Insert</button>
+        <button id="compose-send" class="primary">Send ⏎</button>
+      </div>
+    </div>
+    <div id="keys" class="keys">
+      <button data-key="esc">Esc</button>
+      <button data-key="tab">Tab</button>
+      <button data-key="stab">⇧Tab</button>
+      <button data-mod="ctrl">Ctrl</button>
+      <button data-mod="alt">Alt</button>
+      <button data-key="up">↑</button>
+      <button data-key="down">↓</button>
+      <button data-key="left">←</button>
+      <button data-key="right">→</button>
+      <button data-key="ctrlc">^C</button>
+      <button data-key="enter">⏎</button>
+      <button data-send="|">|</button>
+      <button data-send="~">~</button>
+      <button data-send="/">/</button>
+      <button data-send="-">-</button>
+      <button data-key="paste">Paste</button>
+      <button id="compose-toggle" class="accent">✎ Prompt</button>
+    </div>
+  </section>
+
+  <script src="/vendor/xterm.js"></script>
+  <script src="/vendor/addon-fit.js"></script>
+  <script src="/vendor/addon-web-links.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

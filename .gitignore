@@ -1,0 +1,7 @@
+node_modules/
+npm-debug.log*
+*.log
+.DS_Store
+.env
+# Never commit a local config: it contains the access token
+config.json
